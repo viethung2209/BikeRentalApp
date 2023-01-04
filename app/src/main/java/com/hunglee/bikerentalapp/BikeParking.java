@@ -2,37 +2,36 @@ package com.hunglee.bikerentalapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.hunglee.bikerentalapp.Adapters.MainAdapter;
-import com.hunglee.bikerentalapp.Models.MainModel;
-import com.hunglee.bikerentalapp.databinding.ActivityMainBinding;
+import com.hunglee.bikerentalapp.Adapters.ParkingAdapter;
+import com.hunglee.bikerentalapp.Models.BikeParkingModel;
+import com.hunglee.bikerentalapp.databinding.ActivityBikeParkingBinding;
 
 import java.util.ArrayList;
 
-public class MainActivity extends App {
-
-    ActivityMainBinding binding;
+public class BikeParking extends App {
+    ActivityBikeParkingBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityBikeParkingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-        ArrayList<MainModel> list = new ArrayList<>();
-
-        list = dbHelper.getBikes();
-        MainAdapter adapter = new MainAdapter(list, this);
-        binding.recyclerview.setAdapter(adapter);
+        ArrayList<BikeParkingModel> list = new ArrayList<>();
+        list = dbHelper.getPakings();
+        Log.d("list", list.get(0).getBikeNumber() + "");
+        ParkingAdapter adapter = new ParkingAdapter(list, this);
+        binding.parkingRV.setAdapter(adapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        binding.recyclerview.setLayoutManager(linearLayoutManager);
+        binding.parkingRV.setLayoutManager(linearLayoutManager);
 
     }
 
@@ -46,13 +45,11 @@ public class MainActivity extends App {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.orders:
-                startActivity(new Intent(MainActivity.this, RentalActivity.class));
-                break;
-            case R.id.purchase:
-//                startActivity(new Intent(MainActivity.this, PurchaseActivity.class));
+                startActivity(new Intent(BikeParking.this, RentalActivity.class));
                 break;
             case R.id.credit:
-                startActivity(new Intent(MainActivity.this, CreditCardActivity.class));
+                startActivity(new Intent(BikeParking.this, CreditCardActivity.class));
+                break;
             default:
                 break;
         }

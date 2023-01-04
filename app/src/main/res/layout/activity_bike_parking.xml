@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:orientation="vertical"
-    >
+    tools:context=".BikeParking">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/parkingRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/sample_main_bike"/>
+        tools:listitem="@layout/sample_bike_parking">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>
