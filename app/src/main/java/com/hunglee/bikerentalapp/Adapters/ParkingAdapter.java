@@ -2,6 +2,8 @@ package com.hunglee.bikerentalapp.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.viewhold
     public ParkingAdapter(ArrayList<BikeParkingModel> list, Context context) {
         this.list = list;
         this.context = context;
+
     }
 
     @NonNull
@@ -48,6 +51,13 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.viewhold
             intent.putExtra("bikeNumber", model.getBikeNumber());
             intent.putExtra("desc", model.getDescription());
             intent.putExtra("parkingName", model.getName());
+
+            SharedPreferences sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(context);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("parkingName", model.getName());
+            editor.apply();
             context.startActivity(intent);
         });
     }
