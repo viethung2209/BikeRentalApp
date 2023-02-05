@@ -5,10 +5,7 @@
         android:id="@+id/orders"
         android:title="My Rental Bike"
         app:showAsAction="withText" />
-    <item
-        android:id="@+id/purchase"
-        android:title="Purchase Bike"
-        app:showAsAction="withText" />
+   
     <item
         android:id="@+id/credit"
         android:title="My Credit Card"

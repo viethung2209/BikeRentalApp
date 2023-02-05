@@ -14,17 +14,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hunglee.bikerentalapp.MainActivity;
-import com.hunglee.bikerentalapp.Models.BikeParkingModel;
 import com.hunglee.bikerentalapp.R;
+import com.hunglee.bikerentalapp.ultis.roomdb.bikeparkings.BikeParking;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.viewholder> {
 
-    ArrayList<BikeParkingModel> list;
+    List<BikeParking> list;
     Context context;
 
-    public ParkingAdapter(ArrayList<BikeParkingModel> list, Context context) {
+    public ParkingAdapter(List<BikeParking> list, Context context) {
         this.list = list;
         this.context = context;
 
@@ -39,24 +39,24 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.viewhold
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-        final BikeParkingModel model = list.get(position);
-        holder.parkingImage.setImageResource(model.getImage());
-        holder.parkingName.setText(model.getName());
-        holder.bikeNumber.setText(Integer.toString(model.getBikeNumber()));
-        holder.parkingDescription.setText(model.getDescription());
+        final BikeParking model = list.get(position);
+        holder.parkingImage.setImageResource(model.image);
+        holder.parkingName.setText(model.name);
+        holder.bikeNumber.setText(Integer.toString(model.bikeNumber));
+        holder.parkingDescription.setText(model.description);
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra("image", model.getImage());
-            intent.putExtra("bikeNumber", model.getBikeNumber());
-            intent.putExtra("desc", model.getDescription());
-            intent.putExtra("parkingName", model.getName());
+            intent.putExtra("image", model.image);
+            intent.putExtra("bikeNumber", model.bikeNumber);
+            intent.putExtra("desc", model.description);
+            intent.putExtra("parkingName", model.name);
 
             SharedPreferences sharedPreferences = PreferenceManager
                     .getDefaultSharedPreferences(context);
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("parkingName", model.getName());
+            editor.putString("parkingName", model.name);
             editor.apply();
             context.startActivity(intent);
         });

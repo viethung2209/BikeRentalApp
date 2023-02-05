@@ -12,17 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hunglee.bikerentalapp.DetailActivity;
-import com.hunglee.bikerentalapp.Models.MainModel;
 import com.hunglee.bikerentalapp.R;
+import com.hunglee.bikerentalapp.ultis.roomdb.bikes.Bike;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.viewholder> {
 
-    ArrayList<MainModel> list;
+    List<Bike> list;
     Context context;
 
-    public MainAdapter(ArrayList<MainModel> list, Context context) {
+    public MainAdapter(List<Bike> list, Context context) {
         this.list = list;
         this.context = context;
 
@@ -38,18 +38,19 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.viewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-        final MainModel model = list.get(position);
-        holder.bikeImage.setImageResource(model.getImage());
-        holder.mainName.setText(model.getName());
-        holder.price.setText(model.getPrice());
-        holder.description.setText(model.getDescription());
+        final Bike model = list.get(position);
+        holder.bikeImage.setImageResource(model.image);
+        holder.mainName.setText(model.name);
+        holder.price.setText(String.valueOf(model.price));
+        holder.description.setText(model.description);
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("image", model.getImage());
-            intent.putExtra("price", model.getPrice());
-            intent.putExtra("desc", model.getDescription());
-            intent.putExtra("name", model.getName());
+            intent.putExtra("image", model.image);
+            intent.putExtra("price", model.price);
+            intent.putExtra("desc", model.description);
+            intent.putExtra("name", model.name);
+            intent.putExtra("code", model.code);
             context.startActivity(intent);
         });
     }

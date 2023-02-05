@@ -7,16 +7,22 @@
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/drawable/buttom_rent.xml" value="0.3095" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/drawable/edittext_background.xml" value="0.3095" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.3095" />
+        <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2335" />
+        <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/drawable/ic_mastercard.xml" value="0.2335" />
+        <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/drawable/ic_qr.xml" value="0.2335" />
+        <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/drawable/ic_transfer.xml" value="0.2335" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/font/allerta.xml" value="0.3953125" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/activity_app.xml" value="0.3651041666666667" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/activity_bike_parking.xml" value="0.264" />
-        <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/activity_credit_card.xml" value="0.264" />
+        <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/activity_credit_card.xml" value="0.33" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/activity_detail.xml" value="0.3651041666666667" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/activity_rental.xml" value="0.3651041666666667" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/item_activity.xml" value="0.3651041666666667" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/partial_action.xml" value="0.18645833333333334" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/partial_main_activity.xml" value="0.33" />
+        <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/popup_creditcard.xml" value="0.3651041666666667" />
+        <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/popup_window.xml" value="0.3640625" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/rental_sample.xml" value="0.3651041666666667" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/sample_bike_parking.xml" value="0.3651041666666667" />
         <entry key="..\:/Learning Files/BasicAndroidTraining/BikeRentalApp/app/src/main/res/layout/sample_main_bike.xml" value="0.358695652173913" />

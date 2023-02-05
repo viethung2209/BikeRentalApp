@@ -7,3 +7,12 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+repositories {
+//    mavenCentral()
+//    google()
+
+}
+//dependencies {
+//    classpath 'com.android.tools.build:gradle:7.4.1'
+//}
