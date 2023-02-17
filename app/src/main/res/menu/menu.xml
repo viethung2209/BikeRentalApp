@@ -5,9 +5,14 @@
         android:id="@+id/orders"
         android:title="My Rental Bike"
         app:showAsAction="withText" />
-   
+
     <item
         android:id="@+id/credit"
         android:title="My Credit Card"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/code"
+        android:title="Rent By Code"
         app:showAsAction="withText" />
 </menu>

@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp.service;
+package com.hunglee.bikerentalapp.ultis.service;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -12,11 +12,11 @@ import android.util.Log;
 import com.hunglee.bikerentalapp.ultis.Constant;
 
 public class MyService extends Service {
-    private String LOG_TAG = "MyService";
-    private Receiver receiver = new Receiver();
+    private final String LOG_TAG = "MyService";
+    private final Receiver receiver = new Receiver();
     private Boolean isRunning = true;
-    private IntentFilter intentFilter = new IntentFilter();
-    private Handler handler = new Handler();
+    private final IntentFilter intentFilter = new IntentFilter();
+    private final Handler handler = new Handler();
     private long timeCounter;
 
     @Override
@@ -43,7 +43,7 @@ public class MyService extends Service {
         return START_REDELIVER_INTENT;
     }
 
-    private Runnable runnable = new Runnable() {
+    private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
 
@@ -55,7 +55,7 @@ public class MyService extends Service {
                 sendBroadcast(broadcastIntent);
                 Log.d(LOG_TAG, "Time Counter: " + timeCounter);
             }
-            handler.postDelayed(this, 1000);
+            handler.postDelayed(this, 10);
 
         }
     };

@@ -1,14 +1,16 @@
-package com.hunglee.bikerentalapp;
+package com.hunglee.bikerentalapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.hunglee.bikerentalapp.Adapters.TransactionAdapter;
+import com.hunglee.bikerentalapp.App;
 import com.hunglee.bikerentalapp.databinding.ActivityCreditCardBinding;
-import com.hunglee.bikerentalapp.ultis.roomdb.creditcards.Creditcard;
-import com.hunglee.bikerentalapp.ultis.roomdb.transaction.Transaction;
+import com.hunglee.bikerentalapp.Models.creditcards.Creditcard;
+import com.hunglee.bikerentalapp.Models.transaction.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,5 +40,10 @@ public class CreditCardActivity extends App {
         binding.partial.expDate.setText(creditcard.expirationDate);
         binding.partial.nameHolder.setText(creditcard.name);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(CreditCardActivity.this, MainActivity.class));
     }
 }

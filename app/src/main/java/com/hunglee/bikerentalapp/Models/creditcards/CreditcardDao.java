@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp.ultis.roomdb.creditcards;
+package com.hunglee.bikerentalapp.Models.creditcards;
 
 import static androidx.room.OnConflictStrategy.IGNORE;
 import static androidx.room.OnConflictStrategy.REPLACE;
@@ -25,5 +25,5 @@ public interface CreditcardDao {
     void deteleAll();
 
     @Query("SELECT * FROM Creditcard")
-    public List<Creditcard> findAllCardSync();
+    List<Creditcard> findAllCardSync();
 }

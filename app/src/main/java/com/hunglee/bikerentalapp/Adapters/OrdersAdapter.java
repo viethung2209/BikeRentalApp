@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hunglee.bikerentalapp.R;
-import com.hunglee.bikerentalapp.ultis.roomdb.orders.Order;
+import com.hunglee.bikerentalapp.Models.orders.Order;
 
 import java.util.List;
 

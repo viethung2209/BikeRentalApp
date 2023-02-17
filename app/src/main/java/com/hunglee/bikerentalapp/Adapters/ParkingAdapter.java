@@ -13,9 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hunglee.bikerentalapp.MainActivity;
+import com.hunglee.bikerentalapp.activities.MainActivity;
 import com.hunglee.bikerentalapp.R;
-import com.hunglee.bikerentalapp.ultis.roomdb.bikeparkings.BikeParking;
+import com.hunglee.bikerentalapp.Models.bikeparkings.BikeParking;
 
 import java.util.List;
 

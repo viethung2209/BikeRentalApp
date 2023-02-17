@@ -17,6 +17,4 @@ public class Constant {
     public static final String ACTION_STOP = "STOP";
     public static final String ACTION_RESUME = "RESUME";
     public static final String ACTION_SEND_DATA = "SEND";
-
-
 }

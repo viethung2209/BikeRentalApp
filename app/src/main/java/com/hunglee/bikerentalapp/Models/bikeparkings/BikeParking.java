@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp.ultis.roomdb.bikeparkings;
+package com.hunglee.bikerentalapp.Models.bikeparkings;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp.ultis.roomdb.bikes;
+package com.hunglee.bikerentalapp.Models.bikes;
 
 
 import androidx.room.ColumnInfo;
@@ -27,5 +27,8 @@ public class Bike {
 
     @ColumnInfo(name = "bike_image")
     public int image;
+
+    @ColumnInfo(name = "parking_id")
+    public int parkingId = 1;
 
 }

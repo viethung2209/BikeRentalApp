@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hunglee.bikerentalapp.R;
 import com.hunglee.bikerentalapp.ultis.Constant;
-import com.hunglee.bikerentalapp.ultis.roomdb.transaction.Transaction;
+import com.hunglee.bikerentalapp.Models.transaction.Transaction;
 
 import java.util.List;
 

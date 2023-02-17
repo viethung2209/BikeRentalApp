@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp.ultis.roomdb.orders;
+package com.hunglee.bikerentalapp.Models.orders;
 
 import static androidx.room.OnConflictStrategy.IGNORE;
 import static androidx.room.OnConflictStrategy.REPLACE;
@@ -25,8 +25,8 @@ public interface OrderDao {
     void deleteAll();
 
     @Query("SELECT * FROM `Order`")
-    public List<Order> findAllOrderSync();
+    List<Order> findAllOrderSync();
 
     @Query("SELECT * FROM `Order` WHERE status = :status")
-    public List<Order> findOrderWithStatus(int status);
+    List<Order> findOrderWithStatus(int status);
 }

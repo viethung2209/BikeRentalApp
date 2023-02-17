@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp;
+package com.hunglee.bikerentalapp.activities;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,11 +9,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
+import com.hunglee.bikerentalapp.App;
+import com.hunglee.bikerentalapp.Models.creditcards.Creditcard;
+import com.hunglee.bikerentalapp.Models.orders.Order;
+import com.hunglee.bikerentalapp.Models.transaction.Transaction;
 import com.hunglee.bikerentalapp.databinding.ActivityRentalBinding;
 import com.hunglee.bikerentalapp.ultis.Constant;
-import com.hunglee.bikerentalapp.ultis.roomdb.creditcards.Creditcard;
-import com.hunglee.bikerentalapp.ultis.roomdb.orders.Order;
-import com.hunglee.bikerentalapp.ultis.roomdb.transaction.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,14 +42,28 @@ public class RentalActivity extends App {
 
         List<Order> list = new ArrayList<>();
 
+        Intent intent = new Intent();
+
+        String code = intent.getStringExtra("code");
+//        Order order = new Order();
+//        if (!code.isEmpty()) {
+//            Bike bike = mDb.bikeDao().getBikeByCode(code);
+//            order.bikeCode = code;
+//            order.cost = String.valueOf(bike.price);
+//            order.description = bike.description;
+//            order.name = "Thuê Xe";
+//            mDb.orderDao().insertOrder(order);
+//
+//        } else {
+//
         list = mDb.orderDao().findOrderWithStatus(Constant.ON_RENTING);
         Order order = list.get(0);
+//        }
 
         binding.detailImage.setImageResource(order.image);
         binding.detailDescription.setText(order.description);
         binding.detailName.setText(order.name);
         binding.detailPrice.setText(order.cost);
-
         binding.pauseBtn.setOnClickListener(view -> {
             if (pause) {
                 binding.pauseBtn.setVisibility(View.GONE);
@@ -126,17 +141,15 @@ public class RentalActivity extends App {
     }
 
 
-    private Runnable runnable = new Runnable() {
+    private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
             updateUI();
-            handler.postDelayed(this, 200);
+            handler.postDelayed(this, 10);
         }
     };
 
     private void updateUI() {
-        Intent intent = new Intent();
-
         String time = getFormattedStopWatchTime(timeCounter);
         binding.timeCounter.setText(time);
 
@@ -167,7 +180,7 @@ public class RentalActivity extends App {
 
     }
 
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Constant.ACTION_SEND_DATA)) {
@@ -197,5 +210,8 @@ public class RentalActivity extends App {
         return value;
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(RentalActivity.this, MainActivity.class));
+    }
 }

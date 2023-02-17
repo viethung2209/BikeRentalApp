@@ -1,14 +1,14 @@
-package com.hunglee.bikerentalapp;
+package com.hunglee.bikerentalapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.hunglee.bikerentalapp.databinding.ActivityDetailBinding;
-import com.hunglee.bikerentalapp.service.MyService;
+import com.hunglee.bikerentalapp.App;
+import com.hunglee.bikerentalapp.Models.orders.Order;
+import com.hunglee.bikerentalapp.Models.transaction.Transaction;
+import com.hunglee.bikerentalapp.ultis.service.MyService;
 import com.hunglee.bikerentalapp.ultis.Constant;
-import com.hunglee.bikerentalapp.ultis.roomdb.orders.Order;
-import com.hunglee.bikerentalapp.ultis.roomdb.transaction.Transaction;
 
 public class DetailActivity extends App {
 
@@ -42,6 +42,7 @@ public class DetailActivity extends App {
                 order.name = name;
                 order.status = Constant.ON_RENTING;
                 order.bikeCode = bikeCode;
+                order.image = image;
                 mDb.orderDao().insertOrder(order);
 
                 Transaction transaction = new Transaction();
@@ -66,5 +67,10 @@ public class DetailActivity extends App {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(DetailActivity.this, MainActivity.class));
     }
 }

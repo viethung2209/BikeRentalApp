@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp.ultis.roomdb.orders;
+package com.hunglee.bikerentalapp.Models.orders;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

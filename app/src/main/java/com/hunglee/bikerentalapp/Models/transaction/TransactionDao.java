@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp.ultis.roomdb.transaction;
+package com.hunglee.bikerentalapp.Models.transaction;
 
 import static androidx.room.OnConflictStrategy.IGNORE;
 import static androidx.room.OnConflictStrategy.REPLACE;
@@ -22,7 +22,7 @@ public interface TransactionDao {
     void updateTransaction(Transaction transaction);
 
     @Query("SELECT * FROM `Transaction` ORDER BY transactionId DESC")
-    public List<Transaction> findAllTransaction();
+    List<Transaction> findAllTransaction();
 
     @Query("DELETE FROM `Transaction`")
     void deleteAll();

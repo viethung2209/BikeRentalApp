@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp.ultis.roomdb.creditcards;
+package com.hunglee.bikerentalapp.Models.creditcards;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp.ultis.roomdb.bikes;
+package com.hunglee.bikerentalapp.Models.bikes;
 
 
 import static androidx.room.OnConflictStrategy.IGNORE;
@@ -26,7 +26,12 @@ public interface BikeDao {
     void deleteAll();
 
     @Query("SELECT * FROM Bike")
-    public List<Bike> findAllBikeSync();
+    List<Bike> findAllBikeSync();
 
+    @Query("SELECT * FROM Bike WHERE bike_code = :code")
+    Bike getBikeByCode(String code);
+
+    @Query("SELECT * FROM Bike WHERE parking_id = :parkingId")
+    List<Bike> getBikeByParkingId(int parkingId);
 
 }

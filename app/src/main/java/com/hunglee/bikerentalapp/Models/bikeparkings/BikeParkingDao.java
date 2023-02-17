@@ -1,4 +1,4 @@
-package com.hunglee.bikerentalapp.ultis.roomdb.bikeparkings;
+package com.hunglee.bikerentalapp.Models.bikeparkings;
 
 import static androidx.room.OnConflictStrategy.IGNORE;
 import static androidx.room.OnConflictStrategy.REPLACE;
@@ -26,5 +26,5 @@ public interface BikeParkingDao {
     void deleteAll();
 
     @Query("SELECT * FROM BikeParking")
-    public List<BikeParking> findAllBikeParkingSync();
+    List<BikeParking> findAllBikeParkingSync();
 }

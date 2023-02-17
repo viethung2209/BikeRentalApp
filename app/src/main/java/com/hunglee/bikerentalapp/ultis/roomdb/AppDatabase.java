@@ -6,16 +6,16 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.hunglee.bikerentalapp.ultis.roomdb.bikeparkings.BikeParking;
-import com.hunglee.bikerentalapp.ultis.roomdb.bikeparkings.BikeParkingDao;
-import com.hunglee.bikerentalapp.ultis.roomdb.bikes.Bike;
-import com.hunglee.bikerentalapp.ultis.roomdb.bikes.BikeDao;
-import com.hunglee.bikerentalapp.ultis.roomdb.creditcards.Creditcard;
-import com.hunglee.bikerentalapp.ultis.roomdb.creditcards.CreditcardDao;
-import com.hunglee.bikerentalapp.ultis.roomdb.orders.Order;
-import com.hunglee.bikerentalapp.ultis.roomdb.orders.OrderDao;
-import com.hunglee.bikerentalapp.ultis.roomdb.transaction.Transaction;
-import com.hunglee.bikerentalapp.ultis.roomdb.transaction.TransactionDao;
+import com.hunglee.bikerentalapp.Models.bikeparkings.BikeParking;
+import com.hunglee.bikerentalapp.Models.bikeparkings.BikeParkingDao;
+import com.hunglee.bikerentalapp.Models.bikes.Bike;
+import com.hunglee.bikerentalapp.Models.bikes.BikeDao;
+import com.hunglee.bikerentalapp.Models.creditcards.Creditcard;
+import com.hunglee.bikerentalapp.Models.creditcards.CreditcardDao;
+import com.hunglee.bikerentalapp.Models.orders.Order;
+import com.hunglee.bikerentalapp.Models.orders.OrderDao;
+import com.hunglee.bikerentalapp.Models.transaction.Transaction;
+import com.hunglee.bikerentalapp.Models.transaction.TransactionDao;
 
 @Database(entities = {Bike.class, BikeParking.class, Order.class, Creditcard.class, Transaction.class}, version = 6)
 public abstract class AppDatabase extends RoomDatabase {

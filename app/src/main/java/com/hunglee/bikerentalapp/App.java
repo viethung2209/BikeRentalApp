@@ -1,15 +1,13 @@
 package com.hunglee.bikerentalapp;
 
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hunglee.bikerentalapp.service.MyService;
 import com.hunglee.bikerentalapp.ultis.roomdb.AppDatabase;
-import com.hunglee.bikerentalapp.ultis.roomdb.bikeparkings.BikeParking;
-import com.hunglee.bikerentalapp.ultis.roomdb.bikes.Bike;
+import com.hunglee.bikerentalapp.Models.bikeparkings.BikeParking;
+import com.hunglee.bikerentalapp.Models.bikes.Bike;
 
 public class App extends AppCompatActivity {
 
@@ -40,6 +38,7 @@ public class App extends AppCompatActivity {
         bike.image = R.drawable.xe_thuong_1;
         bike.description = "Xe đạp thường, 1 yên xe và 1 chỗ ngồi phía sau";
         bike.code = "10";
+//        bike.parkingId = 1;
         mDb.bikeDao().inserBike(bike);
 
         bike.name = "Xe thường 1";
