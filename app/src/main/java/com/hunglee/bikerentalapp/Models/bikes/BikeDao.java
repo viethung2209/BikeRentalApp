@@ -29,7 +29,7 @@ public interface BikeDao {
     List<Bike> findAllBikeSync();
 
     @Query("SELECT * FROM Bike WHERE bike_code = :code")
-    Bike getBikeByCode(String code);
+    Bike getBikeByCode(int code);
 
     @Query("SELECT * FROM Bike WHERE parking_id = :parkingId")
     List<Bike> getBikeByParkingId(int parkingId);

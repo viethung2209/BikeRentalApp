@@ -13,9 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hunglee.bikerentalapp.activities.MainActivity;
-import com.hunglee.bikerentalapp.R;
 import com.hunglee.bikerentalapp.Models.bikeparkings.BikeParking;
+import com.hunglee.bikerentalapp.R;
+import com.hunglee.bikerentalapp.activities.MainActivity;
 
 import java.util.List;
 
@@ -51,12 +51,11 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.viewhold
             intent.putExtra("bikeNumber", model.bikeNumber);
             intent.putExtra("desc", model.description);
             intent.putExtra("parkingName", model.name);
-
             SharedPreferences sharedPreferences = PreferenceManager
                     .getDefaultSharedPreferences(context);
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("parkingName", model.name);
+            editor.putLong("parkingId", model.parkingId);
             editor.apply();
             context.startActivity(intent);
         });

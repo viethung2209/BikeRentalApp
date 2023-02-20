@@ -10,9 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.hunglee.bikerentalapp.App;
-import com.hunglee.bikerentalapp.Models.creditcards.Creditcard;
 import com.hunglee.bikerentalapp.Models.orders.Order;
-import com.hunglee.bikerentalapp.Models.transaction.Transaction;
 import com.hunglee.bikerentalapp.databinding.ActivityRentalBinding;
 import com.hunglee.bikerentalapp.ultis.Constant;
 
@@ -35,30 +33,22 @@ public class RentalActivity extends App {
         binding = ActivityRentalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         registerReceiver(broadcastReceiver, new IntentFilter(Constant.ACTION_SEND_DATA));
 
         runnable.run();
 
-        List<Order> list = new ArrayList<>();
+        List<Order> listRenting = new ArrayList<>();
+        List<Order> listPause = new ArrayList<>();
+        Order mOrder = new Order();
 
-        Intent intent = new Intent();
+        listRenting = mDb.orderDao().findOrderWithStatus(Constant.ON_RENTING);
+        listPause = mDb.orderDao().findOrderWithStatus(Constant.ON_PAUSE);
+        if (!listRenting.isEmpty())
+            mOrder = listRenting.get(0);
+        if (!listPause.isEmpty())
+            mOrder = listPause.get(0);
 
-        String code = intent.getStringExtra("code");
-//        Order order = new Order();
-//        if (!code.isEmpty()) {
-//            Bike bike = mDb.bikeDao().getBikeByCode(code);
-//            order.bikeCode = code;
-//            order.cost = String.valueOf(bike.price);
-//            order.description = bike.description;
-//            order.name = "Thuê Xe";
-//            mDb.orderDao().insertOrder(order);
-//
-//        } else {
-//
-        list = mDb.orderDao().findOrderWithStatus(Constant.ON_RENTING);
-        Order order = list.get(0);
-//        }
+        Order order = mOrder;
 
         binding.detailImage.setImageResource(order.image);
         binding.detailDescription.setText(order.description);
@@ -115,27 +105,27 @@ public class RentalActivity extends App {
             stopAction.setAction(Constant.ACTION_STOP);
             sendBroadcast(stopAction);
 
-            Transaction transaction = new Transaction();
-            transaction.type = Constant.WITHDRAW;
-            transaction.name = "Hoàn trả tiền đặt cọc xe";
-            transaction.value = order.cost;
-            transaction.description = "Hoàn trả tiền đặt cọc xe " + order.name;
+//            Transaction transaction = new Transaction();
+//            transaction.type = Constant.WITHDRAW;
+//            transaction.name = "Hoàn trả tiền đặt cọc xe";
+//            transaction.value = finalOrder.cost;
+//            transaction.description = "Hoàn trả tiền đặt cọc xe " + finalOrder.name;
+//
+//            mDb.transactionDao().insertTransaction(transaction);
+//            transaction.type = Constant.DEPOSIT;
+//            transaction.name = "Thanh toán tiền thuê xe";
+//            transaction.value = String.valueOf(calculateMoney(Integer.parseInt(finalOrder.bikeCode)));
+//            transaction.description = "Thanh toán tiền thuê xe " + finalOrder.name;
+//            mDb.transactionDao().insertTransaction(transaction);
+            serverPresenter.createGiveBackBikeTransaction(order, timeCounter);
 
-            mDb.transactionDao().insertTransaction(transaction);
-            transaction.type = Constant.DEPOSIT;
-            transaction.name = "Thanh toán tiền thuê xe";
-            transaction.value = String.valueOf(calculateMoney(Integer.parseInt(order.bikeCode)));
-            transaction.description = "Thanh toán tiền thuê xe " + order.name;
-            mDb.transactionDao().insertTransaction(transaction);
-
-            Creditcard creditcard = new Creditcard();
-            creditcard = mDb.creditcardDao().findAllCardSync().get(0);
-            creditcard.balance -= calculateMoney(Integer.parseInt(order.bikeCode));
-            mDb.creditcardDao().updateCard(creditcard);
-
-            order.status = Constant.ON_STOP;
-            mDb.orderDao().updateOrder(order);
-
+//            Creditcard creditcard = new Creditcard();
+//            creditcard = mDb.creditcardDao().findAllCardSync().get(0);
+//            creditcard.balance -= calculateMoney(Integer.parseInt(finalOrder.bikeCode));
+//            mDb.creditcardDao().updateCard(creditcard);
+//
+//            finalOrder.status = Constant.ON_STOP;
+//            mDb.orderDao().updateOrder(finalOrder);
             startActivity(new Intent(this, MainActivity.class));
         });
     }
@@ -190,25 +180,6 @@ public class RentalActivity extends App {
         }
     };
 
-    private long calculateMoney(int code) {
-        long value = 1;
-        long millisecond = timeCounter;
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(millisecond);
-        if (minutes <= 10)
-            return value;
-        else if (minutes <= 30) {
-            value = 10000;
-        } else {
-            long t = (minutes - 30) / 15;
-            value = 10000 + (t * 3000);
-        }
-
-        if (20 < code && code < 40)
-            value = (long) (value * 1.5);
-        else if (code > 40)
-            value = value * 2;
-        return value;
-    }
 
     @Override
     public void onBackPressed() {

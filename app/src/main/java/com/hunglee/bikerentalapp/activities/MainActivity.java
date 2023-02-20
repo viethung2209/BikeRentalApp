@@ -22,11 +22,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.hunglee.bikerentalapp.Adapters.MainAdapter;
 import com.hunglee.bikerentalapp.App;
 import com.hunglee.bikerentalapp.Models.bikes.Bike;
-import com.hunglee.bikerentalapp.Models.creditcards.Creditcard;
 import com.hunglee.bikerentalapp.Models.orders.Order;
 import com.hunglee.bikerentalapp.R;
 import com.hunglee.bikerentalapp.databinding.ActivityMainBinding;
 import com.hunglee.bikerentalapp.ultis.Constant;
+import com.hunglee.bikerentalapp.ultis.service.MyService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,18 +43,19 @@ public class MainActivity extends App {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
 
         List<Bike> list = new ArrayList<>();
-
-        list = mDb.bikeDao().findAllBikeSync();
+        long s1 = sharedPreferences.getLong("parkingId", 0);
+        list = mDb.bikeDao().getBikeByParkingId((int) s1);
         MainAdapter adapter = new MainAdapter(list, this);
         binding.recyclerview.setAdapter(adapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.recyclerview.setLayoutManager(linearLayoutManager);
 
-        sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(this);
     }
 
     @Override
@@ -67,9 +68,8 @@ public class MainActivity extends App {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.code:
-                String s1 = sharedPreferences.getString("parkingName", null);
-                if (s1 == null) {
-                    Toast.makeText(MainActivity.this, "Choose parking first!", Toast.LENGTH_LONG).show();
+                if (mDb.creditcardDao().findAllCardSync().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Please create Creditcard to RENT bike", Toast.LENGTH_LONG).show();
                     break;
                 } else {
                     List<Order> orders = mDb.orderDao().findOrderWithStatus(Constant.ON_RENTING);
@@ -102,22 +102,38 @@ public class MainActivity extends App {
                         });
                         Button button = popupView.findViewById(R.id.rent_bike);
                         button.setOnClickListener(view -> {
-                            Intent broadCastIntent = new Intent();
-                            broadCastIntent.setAction(Constant.ACTION_START);
-                            sendBroadcast(broadCastIntent);
+
                             final EditText bikeCode = popupView.findViewById(R.id.bikeCode);
-                            Intent intent = new Intent(MainActivity.this, RentalActivity.class);
-                            intent.putExtra("code", bikeCode.toString());
+
+                            int code = Integer.parseInt(bikeCode.getText().toString());
+                            Bike bike = mDb.bikeDao().getBikeByCode(code);
+//                            order.bikeCode = bike.code;
+//                            order.cost = String.valueOf(bike.price);
+//                            order.description = bike.description;
+//                            order.name = "Thuê Xe " + bike.name;
+//                            order.image = bike.image;
+//                            order.status = Constant.ON_RENTING;
+//                            mDb.orderDao().insertOrder(order);
+//
+//                            Transaction transaction = new Transaction();
+//                            transaction.description = "Đặt cọc tiền thuê xe " + bike.name;
+//                            transaction.type = Constant.DEPOSIT;
+//                            transaction.name = "Thuê xe " + bike.name;
+//                            transaction.value = String.valueOf(bike.price);
+//
+//                            mDb.transactionDao().insertTransaction(transaction);
+                            serverPresenter.createRentBikeTransaction(bike);
+                            startService();
                             popupWindow.dismiss();
 
-                            startActivity(intent);
                         });
                     }
                 }
                 break;
             case R.id.orders:
                 List<Order> orders = mDb.orderDao().findOrderWithStatus(Constant.ON_RENTING);
-                if (orders.isEmpty()) {
+                List<Order> orders2 = mDb.orderDao().findOrderWithStatus(Constant.ON_PAUSE);
+                if (orders.isEmpty() && orders2.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Empty Order Now", Toast.LENGTH_LONG).show();
 
                 } else
@@ -158,14 +174,15 @@ public class MainActivity extends App {
                         final EditText issuingBank = popupView.findViewById(R.id.issuingBank);
                         final EditText expDate = popupView.findViewById(R.id.expDate);
                         final EditText code = popupView.findViewById(R.id.securityCode);
-                        Creditcard creditcard = new Creditcard();
-                        creditcard.name = name.getText().toString();
-                        creditcard.accountNumber = accountNumber.getText().toString();
-                        creditcard.inssingBank = issuingBank.getText().toString();
-                        creditcard.expirationDate = expDate.getText().toString();
-                        creditcard.securityCode = code.getText().toString();
 
-                        mDb.creditcardDao().insertCard(creditcard);
+                        serverPresenter.syncCreditCardWithInterBank(
+                                name.getText().toString(),
+                                accountNumber.getText().toString(),
+                                issuingBank.getText().toString(),
+                                expDate.getText().toString(),
+                                code.getText().toString()
+                        );
+
                         popupWindow.dismiss();
                     });
 
@@ -180,5 +197,15 @@ public class MainActivity extends App {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(MainActivity.this, BikeParking.class));
+    }
+
+    private void startService() {
+        Intent intent = new Intent(MainActivity.this, RentalActivity.class);
+        Intent broadCastIntent = new Intent();
+        broadCastIntent.setAction(Constant.ACTION_START);
+        sendBroadcast(broadCastIntent);
+        getApplicationContext().startService(new Intent(getApplicationContext(), MyService.class));
+        startActivity(intent);
+
     }
 }

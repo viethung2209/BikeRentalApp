@@ -11,9 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hunglee.bikerentalapp.activities.DetailActivity;
-import com.hunglee.bikerentalapp.R;
 import com.hunglee.bikerentalapp.Models.bikes.Bike;
+import com.hunglee.bikerentalapp.R;
+import com.hunglee.bikerentalapp.activities.DetailActivity;
 
 import java.util.List;
 
@@ -51,6 +51,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.viewholder> {
             intent.putExtra("desc", model.description);
             intent.putExtra("name", model.name);
             intent.putExtra("code", model.code);
+            intent.putExtra("parkingId", model.parkingId);
             context.startActivity(intent);
         });
     }
