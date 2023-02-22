@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hunglee.bikerentalapp.Models.bikes.Bike;
 import com.hunglee.bikerentalapp.R;
-import com.hunglee.bikerentalapp.activities.DetailActivity;
+import com.hunglee.bikerentalapp.activities.detail.DetailActivity;
 
 import java.util.List;
 
